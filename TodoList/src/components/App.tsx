@@ -22,7 +22,7 @@ export const App: React.FC = () => {
   };
 
   const addTodo = () => {
-    if (value) {
+    if (value.trim()) {
       setTodos([
         ...todos,
         {
