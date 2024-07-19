@@ -50,12 +50,6 @@ export const App: React.FC = () => {
     );
   };
 
-  const handleRemoveLC = (): void => {
-    // localStorage.removeItem("todos");
-    // location.reload();
-    setTodos([]);
-  };
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -67,21 +61,19 @@ export const App: React.FC = () => {
   }, [todos]);
 
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="inputSection">
         <input
           type="text"
+          placeholder="Add new todo"
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           ref={inputRef}
         />
-        <button onClick={addTodo}>add</button>
+        <button onClick={addTodo}>+</button>
       </div>
       <TodoList items={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
-      <div>
-        <button onClick={handleRemoveLC}>delete all todos</button>
-      </div>
     </div>
   );
 };
