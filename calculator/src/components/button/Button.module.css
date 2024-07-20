@@ -1,0 +1,23 @@
+.btn {
+  border: none;
+  width: 100px;
+  height: 100px;
+
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.operator {
+  background-color: #dadce0;
+}
+
+.number {
+  background-color: #f1f3f4;
+}
+.equal {
+  background-color: #4285f4;
+}
+
+.clear {
+  background-color: rgb(255, 135, 79);
+}
