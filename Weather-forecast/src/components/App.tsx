@@ -19,6 +19,12 @@ export const App: React.FC = () => {
     setSearchCity(city);
   };
 
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="container">
       <div className="wrapper">
@@ -26,6 +32,7 @@ export const App: React.FC = () => {
           city={city}
           onCityChange={handleChange}
           onSearch={handleSearch}
+          onKeyDown={handleKeyDown}
         />
 
         {weather.status === "loading" && (

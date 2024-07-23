@@ -27,6 +27,7 @@ export const WeatherCard: React.FC<IWeatherCardProps> = (props) => {
         <h2>
           <FaCity />
           {data.name}
+          <span className={styles.country}>({data.sys.country})</span>
         </h2>
 
         <div className={styles.weather}>
