@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { IWeatherData } from "../../types/interfaces";
 import styles from "./WeatherCard.module.css";
 import { PiWindThin } from "react-icons/pi";
@@ -13,10 +12,6 @@ interface IWeatherCardProps {
 
 export const WeatherCard: React.FC<IWeatherCardProps> = (props) => {
   const { data } = props;
-
-  useEffect(() => {
-    console.log(data);
-  }, []);
 
   if (!data) {
     return null;

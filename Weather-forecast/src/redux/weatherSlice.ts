@@ -1,43 +1,52 @@
-import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IWeatherData, IWeatherState } from "../types/interfaces";
 import { fetchWeather } from "../api/weatherApi";
 
 const initialState: IWeatherState = {
-    data: null,
-    error: null,
-    status: "idle"
-}
+  data: null,
+  error: null,
+  status: "idle",
+};
 
-export const getWeather = createAsyncThunk<IWeatherData, string, object>(
-    'weather/getWeather',
-    async(city: string) => {
-        const response = await fetchWeather(city)
-        return response as IWeatherData
+export const getWeather = createAsyncThunk<
+  IWeatherData,
+  string,
+  { rejectValue: string }
+>("weather/getWeather", async (city: string, { rejectWithValue }) => {
+  try {
+    const response = await fetchWeather(city);
+    return response as IWeatherData;
+  } catch (error) {
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    } else {
+      return rejectWithValue("Unknown error");
     }
-)
-
+  }
+});
 
 const weatherSlice = createSlice({
-    name: 'weather',
-    initialState,
-    reducers:{},
-    extraReducers: (builder) => {
-        builder
-            .addCase(getWeather.pending, (state) => {
-                state.status = "loading"
-            })
-            .addCase(getWeather.fulfilled, (state, action) =>{
-                state.status = "succeeded"
-                state.data = action.payload
-            })
-            .addCase(getWeather.rejected, (state, action) => {
-                state.status = "failed"
-                state.error = action.error.message || "Something went wrong :("
-            })
-    },
-})
+  name: "weather",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getWeather.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getWeather.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+      })
+      .addCase(getWeather.rejected, (state, action) => {
+        state.status = "failed";
+        if (action.payload) {
+          state.error = action.payload as string;
+        } else {
+          state.error = action.error.message || "Something went wrong :(";
+        }
+      });
+  },
+});
 
-
-
-
-export default weatherSlice.reducer
+export default weatherSlice.reducer;
