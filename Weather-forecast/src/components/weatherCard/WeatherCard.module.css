@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    min-width: 30%;
+    border-radius: 15px;
+
+    color: #fff;
+
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+
+    padding: 20px 50px;
+
+    h2 {
+      font-weight: normal;
+      font-size: 32px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .temperature {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      p {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 18px;
+
+        span {
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .feelsLike {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        color: #bebebe;
+      }
+    }
+
+    .wind {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+
+      .icon {
+        font-size: 25px;
+      }
+    }
+
+    .weather {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .main {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        p {
+          font-size: 18px;
+        }
+      }
+
+      span {
+        font-size: 14px;
+        color: #bebebe;
+      }
+    }
+
+    .sun {
+      display: flex;
+      gap: 15px;
+
+      font-size: 18px;
+
+      p {
+        display: flex;
+        gap: 5px;
+      }
+    }
+  }
+}

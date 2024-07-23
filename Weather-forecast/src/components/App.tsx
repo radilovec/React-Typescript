@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useWeather } from "../hooks/useWeather";
 import { WeatherCard } from "./weatherCard/WeatherCard";
+import { Search } from "./search/Search";
+import { Loader } from "./loader/Loader";
+import { Error } from "./error/Error";
 
 export const App: React.FC = () => {
   const [city, setCity] = useState<string>("");
@@ -16,20 +19,27 @@ export const App: React.FC = () => {
     setSearchCity(city);
   };
 
-  useEffect(() => {
-    if (weather.status === "succeeded") {
-      console.log(weather.data);
-    }
-  }, [weather.status, weather.data]);
-
   return (
-    <div>
-      <input type="text" value={city} onChange={handleChange} />
-      <button onClick={handleSearch}>Search</button>
+    <div className="container">
+      <div className="wrapper">
+        <Search
+          city={city}
+          onCityChange={handleChange}
+          onSearch={handleSearch}
+        />
 
-      {weather.status === "loading" && <p>Loading...</p>}
-      {weather.status === "succeeded" && <WeatherCard data={weather.data} />}
-      {weather.status === "failed" && <p>{weather.error}</p>}
+        {weather.status === "loading" && (
+          <div>
+            <Loader />
+          </div>
+        )}
+        {weather.status === "succeeded" && <WeatherCard data={weather.data} />}
+        {weather.status === "failed" && (
+          <div>
+            <Error err={weather.error} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
