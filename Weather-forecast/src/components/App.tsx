@@ -35,13 +35,18 @@ export const App: React.FC = () => {
           onKeyDown={handleKeyDown}
         />
 
-        {weather.status === "loading" && (
+        {(weather.weatherStatus === "loading" ||
+          weather.forecastStatus === "loading") && (
           <div>
             <Loader />
           </div>
         )}
-        {weather.status === "succeeded" && <WeatherCard data={weather.data} />}
-        {weather.status === "failed" && (
+        {weather.weatherStatus === "succeeded" &&
+          weather.forecastStatus === "succeeded" && (
+            <WeatherCard data={weather.data} forecast={weather.forecast} />
+          )}
+        {(weather.weatherStatus === "failed" ||
+          weather.forecastStatus === "failed") && (
           <div>
             <Error err={weather.error} />
           </div>

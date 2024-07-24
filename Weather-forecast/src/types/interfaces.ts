@@ -34,6 +34,38 @@ export interface IWeatherData {
 
 export interface IWeatherState {
   data: IWeatherData | null;
+  forecast: IWeatherForecastData | null;
   error: string | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  weatherStatus: "idle" | "loading" | "succeeded" | "failed";
+  forecastStatus: "idle" | "loading" | "succeeded" | "failed";
+}
+
+interface WeatherForecastMain {
+  temp: number;
+  temp_max: number;
+  temp_min: number;
+  feels_like: number;
+  pressure: number;
+}
+
+interface WeatherForecastDescription {
+  main: string;
+  description: string;
+  icon: string;
+}
+
+interface WeatherForecastWind {
+  speed: number;
+}
+
+export interface WeatherForecastItem {
+  main: WeatherForecastMain;
+  weather: WeatherForecastDescription[];
+  wind: WeatherForecastWind;
+  dt_txt: string;
+  dt: number;
+}
+
+export interface IWeatherForecastData {
+  list: WeatherForecastItem[];
 }

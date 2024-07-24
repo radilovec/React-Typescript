@@ -1,17 +1,19 @@
-import { IWeatherData } from "../../types/interfaces";
+import { IWeatherData, IWeatherForecastData } from "../../types/interfaces";
 import styles from "./WeatherCard.module.css";
 import { PiWindThin } from "react-icons/pi";
 import { FaTemperatureHigh, FaCity } from "react-icons/fa";
 import { TbTemperatureCelsius } from "react-icons/tb";
 import { FiSunrise, FiSunset } from "react-icons/fi";
 import { msToTime } from "../../utils/dateFormate";
+import { WeatherForecast } from "../weatherForecast/WeatherForecast";
 
 interface IWeatherCardProps {
   data: IWeatherData | null;
+  forecast: IWeatherForecastData | null;
 }
 
 export const WeatherCard: React.FC<IWeatherCardProps> = (props) => {
-  const { data } = props;
+  const { data, forecast } = props;
 
   if (!data) {
     return null;
@@ -72,6 +74,7 @@ export const WeatherCard: React.FC<IWeatherCardProps> = (props) => {
           </p>
         </div>
       </div>
+      <WeatherForecast forecast={forecast} />
     </div>
   );
 };
